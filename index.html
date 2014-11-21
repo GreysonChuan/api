@@ -11,315 +11,338 @@
   <body>
     <div id="main">
       
-<h2 id="URL_Scheme">URL Scheme</h2>
-<b>msmpos</b><br/>
-ex)<br/>
-msmpos://?return_url=xxxxx&pwd=1234&return_key=20130213001&type=S&amount=10.50&tip_amount=0.0&reference_no=test_ref
-msmpos://?return_url=xxxxx&pwd=1234&return_key=20130213001&type=V&receipt_no=1302130001 <br/><br/>
+<h2 id="url-scheme">URL Scheme</h2>
+<p><strong>msmpos</strong>
+ex)
+msmpos://?return_url=xxxxx&amp;pwd=1234&amp;return_key=20130213001&amp;type=S&amp;amount=10.50&amp;tip_amount=0.0&amp;reference_no=test_ref
+msmpos://?return_url=xxxxx&amp;pwd=1234&amp;return_key=20130213001&amp;type=V&amp;receipt_no=1302130001 </p>
 
-<h2 id="Sale">SALE</h2>
+<h2 id="sale">SALE</h2>
 <ul>
-	<li>Request Parameters</li>
+  <li>Request Parameters</li>
 </ul>
-<table>
-	<tr>
-		<th>No</th>
-		<th>Name</th>
-		<th></th>
-		<th>Type</th>
-		<th>Length</th>
-		<th>Description/Value</th>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td><b>return_url</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Your app URL Scheme</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td><b>pwd</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Password for FDMS mPOS</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td><b>return_key</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Unique key for order identification</td>
-	</tr>
-	<tr>
-		<td>4</td>
-		<td><b>type</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td>1</td>
-		<td>S : sale</td>
-	</tr>
-	<tr>
-		<td>5</td>
-		<td><b>amount</b></td>
-		<td>M</td>
-		<td>Numeric</td>
-		<td>10</td>
-		<td>For sale / Except GST and Service Charge amount</td>
-	</tr>
-	<tr>
-		<td>6</td>
-		<td><b>tip_amount</b></td>
-		<td>O</td>
-		<td>Numeric</td>
-		<td>10</td>
-		<td>Tip amount</td>
-	</tr>
-	<tr>
-		<td>7</td>
-		<td><b>reference_no</b></td>
-		<td>O</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Reference No. in mPOS app</td>
-	</tr>
-	<tr>
-		<td>8</td>
-		<td><b>any others</b></td>
-		<td>O</td>
-		<td></td>
-		<td></td>
-		<td>Any other key & value pairs to return</td>
-	</tr>
-</table>
-<ul>
-	<li>Response Parameters</li>
-</ul>
-<table>
-	<tr>
-		<th>No</th>
-		<th>Name</th>
-		<th></th>
-		<th>Type</th>
-		<th>Length</th>
-		<th>Description/Value</th>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td><b>return_key</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Unique key for order identification</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td><b>result_code</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td>4</td>
-		<td>0000 : succeed / others: failed</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td><b>result_message</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td></td>
-		<td>SUCCEED / Failed message</td>
-	</tr>
-	<tr>
-		<td>4</td>
-		<td><b>type</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td>1</td>
-		<td>S : sale</td>
-	</tr>
-	<tr>
-		<td>5</td>
-		<td><b>receipt_no</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td>14</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>6</td>
-		<td><b>sales_amount</b></td>
-		<td>M</td>
-		<td>Numeric</td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>7</td>
-		<td><b>tip_amount</b></td>
-		<td>M</td>
-		<td>Numeric</td>
-		<td>10</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>8</td>
-		<td><b>gst_amount</b></td>
-		<td>M</td>
-		<td>Numeric</td>
-		<td>10</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>9</td>
-		<td><b>service_amount</b></td>
-		<td>M</td>
-		<td>Numeric</td>
-		<td>10</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>10</td>
-		<td><b>total_amount</b></td>
-		<td>M</td>
-		<td>Numeric</td>
-		<td>10</td>
-		<td>sales_amount + tip_amount + GST_amount + Service_Charge</td>
-	</tr>
-	<tr>
-		<td>11</td>
-		<td><b>any others</b></td>
-		<td>O</td>
-		<td></td>
-		<td></td>
-		<td>Others value received</td>
-	</tr>
-</table><br/>
 
-<h2 id="Void">VOID</h2>
-<ul>
-	<li>Request Parameters</li>
-</ul>
 <table>
-	<tr>
-		<th>No</th>
-		<th>Name</th>
-		<th></th>
-		<th>Type</th>
-		<th>Length</th>
-		<th>Description/Value</th>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td><b>return_url</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Your app URL Scheme</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td><b>pwd</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Password for FDMS mPOS</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td><b>return_key</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Unique key for order identification</td>
-	</tr>
-	<tr>
-		<td>4</td>
-		<td><b>type</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td>1</td>
-		<td>V : void</td>
-	</tr>
-	<tr>
-		<td>5</td>
-		<td><b>receipt_no</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td>14</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>6</td>
-		<td><b>any others</b></td>
-		<td>O</td>
-		<td></td>
-		<td></td>
-		<td>Any other key & value pairs to return</td>
-	</tr>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th> </th>
+      <th>Type</th>
+      <th>Length</th>
+      <th>Description/Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><strong>return_url</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Your app URL scheme</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>pwd</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Password for FDMS mPOS</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>return_key</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Unique key for order identification</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>type</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td>1</td>
+      <td>S : sale</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>amount</strong></td>
+      <td>M</td>
+      <td>Numeric</td>
+      <td>10</td>
+      <td>For sale / Except GST and Service Charge amount</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>tip_amount</strong></td>
+      <td>O</td>
+      <td>Numeric</td>
+      <td>10</td>
+      <td>Tip amount</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>reference_no</strong></td>
+      <td>O</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Reference No. in mPOS app</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><strong>any others</strong></td>
+      <td>O</td>
+      <td> </td>
+      <td> </td>
+      <td>Any other key &amp; value pairs to return</td>
+    </tr>
+  </tbody>
 </table>
+
 <ul>
-	<li>Response Parameters</li>
+  <li>Response Parameters</li>
 </ul>
+
 <table>
-	<tr>
-		<th>No</th>
-		<th>Name</th>
-		<th></th>
-		<th>Type</th>
-		<th>Length</th>
-		<th>Description/Value</th>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td><b>return_key</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td></td>
-		<td>Unique key for order identification</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td><b>result_code</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td>4</td>
-		<td>0000 : succeed / others: failed</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td><b>result_message</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td></td>
-		<td>SUCCEED / Failed message</td>
-	</tr>
-	<tr>
-		<td>4</td>
-		<td><b>type</b></td>
-		<td>M</td>
-		<td>Alphabet</td>
-		<td>1</td>
-		<td>V : void</td>
-	</tr>
-	<tr>
-		<td>5</td>
-		<td><b>receipt_no</b></td>
-		<td>M</td>
-		<td>Alphanumeric</td>
-		<td>14</td>
-		<td>For void</td>
-	</tr>
-	<tr>
-		<td>6</td>
-		<td><b>any others</b></td>
-		<td>O</td>
-		<td></td>
-		<td></td>
-		<td>Others value received</td>
-	</tr>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th> </th>
+      <th>Type</th>
+      <th>Length</th>
+      <th>Description/Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><strong>return_key</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Unique key for order identification</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>result_code</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td>4</td>
+      <td>0000 : succeed / others: failed</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>result_message</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td> </td>
+      <td>SUCCEED / Failed message</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>type</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td>1</td>
+      <td>S : sale</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>receipt_no</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td>14</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>sales_amount</strong></td>
+      <td>M</td>
+      <td>Numeric</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>tip_amount</strong></td>
+      <td>M</td>
+      <td>Numeric</td>
+      <td>10</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><strong>gst_amount</strong></td>
+      <td>M</td>
+      <td>Numeric</td>
+      <td>10</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><strong>service_amount</strong></td>
+      <td>M</td>
+      <td>Numeric</td>
+      <td>10</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><strong>total_amount</strong></td>
+      <td>M</td>
+      <td>Numeric</td>
+      <td>10</td>
+      <td>sales_amount + tip_amount + GST_amount + Service_Charge</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td><strong>any others</strong></td>
+      <td>O</td>
+      <td> </td>
+      <td> </td>
+      <td>Others value received</td>
+    </tr>
+  </tbody>
 </table>
+
+<h2 id="void">VOID</h2>
+<ul>
+  <li>Request Parameters</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th> </th>
+      <th>Type</th>
+      <th>Length</th>
+      <th>Description/Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><strong>return_url</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Your app URL Scheme</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>pwd</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Password for FDMS mPOS</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>return_key</strong></td>
+      <td>M</td>
+      <td>ALphanumeric</td>
+      <td> </td>
+      <td>Unique key for order identification</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>type</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td>1</td>
+      <td>V : void</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>receipt_no</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td>14</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>any others</strong></td>
+      <td>O</td>
+      <td> </td>
+      <td> </td>
+      <td>Any other key &amp; value pairs to return</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Response Parameters</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th> </th>
+      <th>Type</th>
+      <th>Length</th>
+      <th>Description/Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><strong>return_key</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td> </td>
+      <td>Unique key for order identification</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>result_code</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td>4</td>
+      <td>0000 : succeed / others: failed</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>result_message</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td> </td>
+      <td>SUCCEED / Failed message</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>type</strong></td>
+      <td>M</td>
+      <td>Alphabet</td>
+      <td>1</td>
+      <td>V : void</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>receipt_no</strong></td>
+      <td>M</td>
+      <td>Alphanumeric</td>
+      <td>14</td>
+      <td>For void</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>any others</strong></td>
+      <td>O</td>
+      <td> </td>
+      <td> </td>
+      <td>Others value received</td>
+    </tr>
+  </tbody>
+</table>
+
     </div>
     <div id="sidebar">
       <h2>Table of contents</h2>
