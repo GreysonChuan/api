@@ -17,7 +17,7 @@ table {
   border-collapse: collapse;
 }
 
-code {
+pre {
   font-family: Courier, Consolas, monospace;
   font-size: 13px;
   line-height: 18px;
@@ -26,6 +26,12 @@ code {
   background-color: #F1F5F9;
   color: #666;
   padding: 0.3em 1em;
+}
+
+code {
+  font-family: Courier, Consolas, monospace;
+  font-size: 13px;
+  color: #666;
 }
 
 table, td, th{
