@@ -20,16 +20,17 @@
 <hr />
 
 <ol>
-  <li>Set up return URL for ffastpay to return to your app on completion of a transaction at ffastpay:	</li>
-</ol>
+  <li>
+    <p>Set up return URL for ffastpay to return to your app on completion of a transaction at ffastpay:	</p>
 
-<p>1.1 Go to Project Target &gt; Info
-1.2 Add URL Types
-	Identifier: <yourappbundleid> e.g. com.ffastpay.mpos.URLSchemeDemo
-	URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters)</yourappurlscheme></yourappbundleid></p>
-
-<ol>
-  <li>Implement the handleOpenURL method in your AppDelegate. </li>
+    <p>1.1 Go to Project Target &gt; Info 
+ 1.2 Add URL Types 
+     Identifier: <yourappbundleid> e.g. com.ffastpay.mpos.URLSchemeDemo 
+     URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters) </yourappurlscheme></yourappbundleid></p>
+  </li>
+  <li>
+    <p>Implement the handleOpenURL method in your AppDelegate. </p>
+  </li>
 </ol>
 
 <p>2.1 When this method is called in your app, the ffastpay url scheme is passed to ffastpay app delegate.
