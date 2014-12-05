@@ -47,13 +47,13 @@ URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of t
       <pre><code>
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
 {
-NSString *query = [url query];
+	NSString *query = [url query];
 
-NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @”msg”, nil];
+	NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @”msg”, nil];
 
-[[NSNotificationCenter defaultCenter] postNotificationName:@”RECEIVED_RESULT” object:self userInfo:resultDic];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@”RECEIVED_RESULT” object:self userInfo:resultDic];
 
-return YES;
+	return YES;
 }
 		</code></pre>
     </div>

@@ -17,6 +17,10 @@ table {
   border-collapse: collapse;
 }
 
+#code {
+  width: 500px;
+}
+
 pre {
   font-family: Courier, Consolas, monospace;
   font-size: 13px;
