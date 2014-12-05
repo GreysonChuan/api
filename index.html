@@ -25,11 +25,16 @@
 
     <ol>
       <li>Go to Project Target &gt; Info </li>
-      <li>Add URL Types <br />
-Identifier: <yourappbundleid> e.g. com.ffastpay.mpos.URLSchemeDemo <br />
+      <li>Add URL Types 
+Identifier: <yourappbundleid> e.g. com.ffastpay.mpos.URLSchemeDemo 
 URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters) </yourappurlscheme></yourappbundleid></li>
     </ol>
   </li>
+</ol>
+
+<hr />
+
+<ol>
   <li>
     <p>Implement the handleOpenURL method in your AppDelegate. </p>
 
@@ -37,27 +42,24 @@ URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of t
       <li>When this method is called in your app, the ffastpay url scheme is passed to ffastpay app delegate.</li>
       <li>Post a notification for the receipt of response data from ffastpay.</li>
     </ol>
-  </li>
-</ol>
 
-<ul>
-  <li>
-    <p>(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+    <div id="code">
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
 {
-  NSString *query = [url query];</p>
+ NSString *query = [url query];
 
-    <p>NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @”msg”
-                             , nil];</p>
-
-    <p>[[NSNotificationCenter defaultCenter] postNotificationName:@”RECEIVED_RESULT” object:self userInfo:resultDic];</p>
-
-    <p>return YES;
-}</p>
+ NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @"msg"
+                            , nil];
+    
+ [[NSNotificationCenter defaultCenter] postNotificationName:@"RECEIVED_RESULT" object:self userInfo:resultDic];
+    
+ return YES;
+}
+ </div>
   </li>
-</ul>
-
-<ol>
-  <li>Call your application’s openURL method with ffastpay’s URL and parameters to launch a ffastpay transaction:</li>
+  <li>
+    <p>Call your application’s openURL method with ffastpay’s URL and parameters to launch a ffastpay transaction:</p>
+  </li>
 </ol>
 
 <ul>
