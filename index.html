@@ -239,34 +239,175 @@ Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_ke
 
 <p>Returned as NSDictionary:</p>
 
-<p>No | Name           | Mandatory(M) / Optional(O) | Type | Length | Description / Value
-– | —-           | ————————– | —- | —— | ——————-
-1  | return_key	    | M                          | AN   |        | Unique key for order identification
-2  | result_code    | M                          | A    | 4      | 0000: Succeed
-																   Others: Failed	
-3  | result_message | M                          | A    |        | SUCCEED / Failed Message
-4  | type           | M                          | A    | 1      | S: Sale
-5  | receipt_no     | M                          | AN   | 14     |
-6  | sales_amount   | M                          | N    |        |
-7  | tip_amount     | M                          | N    | 10     |
-8  | gst_amount     | M                          | N    | 10     |
-9  | service_amount | M                          | N    | 10     |
-10 | total_amount   | M                          | N    | 10     | sales_amount + tip_amount + gst_amount + service_amount
-11 | any others     | O                          |      |        | Any other key &amp; value pairs</p>
+<table>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th>Mandatory(M) / Optional(O)</th>
+      <th>Type</th>
+      <th>Length</th>
+      <th>Description / Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>return_key</td>
+      <td>M</td>
+      <td>AN</td>
+      <td> </td>
+      <td>Unique key for order identification</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>result_code</td>
+      <td>M</td>
+      <td>A</td>
+      <td>4</td>
+      <td>0000: Succeed <br /> Others: Failed</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>result_message</td>
+      <td>M</td>
+      <td>A</td>
+      <td> </td>
+      <td>SUCCEED / Failed Message</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>type</td>
+      <td>M</td>
+      <td>A</td>
+      <td>1</td>
+      <td>S: Sale</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>receipt_no</td>
+      <td>M</td>
+      <td>AN</td>
+      <td>14</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>sales_amount</td>
+      <td>M</td>
+      <td>N</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>tip_amount</td>
+      <td>M</td>
+      <td>N</td>
+      <td>10</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>gst_amount</td>
+      <td>M</td>
+      <td>N</td>
+      <td>10</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>service_amount</td>
+      <td>M</td>
+      <td>N</td>
+      <td>10</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>total_amount</td>
+      <td>M</td>
+      <td>N</td>
+      <td>10</td>
+      <td>sales_amount + tip_amount + gst_amount + service_amount</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>any others</td>
+      <td>O</td>
+      <td> </td>
+      <td> </td>
+      <td>Any other key &amp; value pairs</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>4.2 Void Transaction Response Data</p>
 
 <p>Returned as NSDictionary:</p>
 
-<p>No | Name           | Mandatory(M) / Optional(O) | Type | Length | Description / Value
-– | —-           | ————————– | —- | —— | ——————-
-1  | return_key	    | M                          | AN   |        | Unique key for order identification
-2  | result_code    | M                          | A    | 4      | 0000: Succeed
-																   Others: Failed	
-3  | result_message | M                          | A    |        | SUCCEED / Failed Message
-4  | type           | M                          | A    | 1      | V: Void
-5  | receipt_no     | M                          | AN   | 14     | For void
-6  | any others     | O                          |      |        | Any other key &amp; value pairs</p>
+<table>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th>Mandatory(M) / Optional(O)</th>
+      <th>Type</th>
+      <th>Length</th>
+      <th>Description / Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>return_key</td>
+      <td>M</td>
+      <td>AN</td>
+      <td> </td>
+      <td>Unique key for order identification</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>result_code</td>
+      <td>M</td>
+      <td>A</td>
+      <td>4</td>
+      <td>0000: Succeed <br /> Others: Failed</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>result_message</td>
+      <td>M</td>
+      <td>A</td>
+      <td> </td>
+      <td>SUCCEED / Failed Message</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>type</td>
+      <td>M</td>
+      <td>A</td>
+      <td>1</td>
+      <td>V: Void</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>receipt_no</td>
+      <td>M</td>
+      <td>AN</td>
+      <td>14</td>
+      <td>For void</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>any others</td>
+      <td>O</td>
+      <td> </td>
+      <td> </td>
+      <td>Any other key &amp; value pairs</td>
+    </tr>
+  </tbody>
+</table>
 
 
     </div>
