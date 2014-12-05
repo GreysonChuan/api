@@ -17,6 +17,17 @@ table {
   border-collapse: collapse;
 }
 
+code {
+  font-family: Courier, Consolas, monospace;
+  font-size: 13px;
+  line-height: 18px;
+  tab-interval: 0.5em;
+  border: 1px solid #C7CFD5;
+  background-color: #F1F5F9;
+  color: #666;
+  padding: 0.3em 1em;
+}
+
 table, td, th{
   border: 1px solid black;
 }
