@@ -17,10 +17,6 @@ table {
   border-collapse: collapse;
 }
 
-#code {
-  width: 100%;
-}
-
 pre {
   font-family: Courier, Consolas, monospace;
   font-size: 13px;
@@ -57,7 +53,7 @@ a:hover {
   top: 40px;
   left: 280px;
 
-  width: 80%;
+  width: 75%;
 }
 
 #main h1 {
