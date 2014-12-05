@@ -68,99 +68,101 @@ URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of t
  </code></pre>
 
     <ol>
-      <li>Sale Transaction Request Parameters</li>
+      <li>
+        <p>Sale Transaction Request Parameters</p>
+
+        <p>Request Parameters:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_url</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Your app URL Scheme</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>pwd</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Password for FDMS mPOS</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>S: Sale</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td>For sale / except GST &amp; Service</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>tip_amount</td>
+              <td>O</td>
+              <td>N</td>
+              <td>10</td>
+              <td>Tip amount</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>reference_no</td>
+              <td>O</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Reference number in mPOS app</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pair to return</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>URL: msmpos://?
+params: return_url=&amp;pwd=&amp;return_key=&amp;type=S&amp;amount=&amp;tip_amount=&amp;reference_no=&amp;</p>
+
+        <p>Note that the return_url needs to be URL-encoded</p>
+
+        <p>Example:
+Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;reference_no=INV14110021&amp;type=S&amp;amount=0.20&amp;pwd=1234 </p>
+      </li>
     </ol>
-
-    <p>Request Parameters:</p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Name</th>
-          <th>Mandatory(M) / Optional(O)</th>
-          <th>Type</th>
-          <th>Length</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>return_url</td>
-          <td>M</td>
-          <td>AN</td>
-          <td> </td>
-          <td>Your app URL Scheme</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>pwd</td>
-          <td>M</td>
-          <td>AN</td>
-          <td> </td>
-          <td>Password for FDMS mPOS</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>return_key</td>
-          <td>M</td>
-          <td>AN</td>
-          <td> </td>
-          <td>Unique key for order identification</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>type</td>
-          <td>M</td>
-          <td>A</td>
-          <td>1</td>
-          <td>S: Sale</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>amount</td>
-          <td>M</td>
-          <td>N</td>
-          <td>10</td>
-          <td>For sale / except GST &amp; Service</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>tip_amount</td>
-          <td>O</td>
-          <td>N</td>
-          <td>10</td>
-          <td>Tip amount</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>reference_no</td>
-          <td>O</td>
-          <td>AN</td>
-          <td> </td>
-          <td>Reference number in mPOS app</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>any others</td>
-          <td>O</td>
-          <td> </td>
-          <td> </td>
-          <td>Any other key &amp; value pair to return</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p>URL: msmpos://?
- params: return_url=&amp;pwd=&amp;return_key=&amp;type=S&amp;amount=&amp;tip_amount=&amp;reference_no=&amp;</p>
   </li>
 </ol>
-
-<p>Note that the return_url needs to be URL-encoded</p>
-
-<p>Example:
-Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;reference_no=INV14110021&amp;type=S&amp;amount=0.20&amp;pwd=1234 </p>
 
 <p>3.2 Void Transaction Request Parameters
 	URL: msmpos://?
