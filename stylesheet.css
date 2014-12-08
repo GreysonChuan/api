@@ -27,19 +27,49 @@ pre {
   color: #666;
 }
 
-tbody>tr:last-child td {
-  border-bottom-width:0
-}
-
 code {
   font-family: Courier, Consolas, monospace;
   font-size: 13px;
   color: #666;
 }
 
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+  empty-cells:show;
+  border:1px solid #cbcbcb
+}
+
+tbody>tr:last-child td {
+  border-bottom-width:0
+}
+
+td:first-child, th:first-child {
+  border-left-width:0
+}
+
+thead {
+  background:#e0e0e0;
+  color:#000;
+  text-align:left;
+  vertical-align:bottom
+}
+
+td {
+  background-color:transparent
+}
+
+
 td, th{
   border-width:0 0 1px;
-  border-bottom:1px solid #cbcbcb
+  border-bottom:1px solid #cbcbcb;
+  
+  border-left:1px solid #cbcbcb;
+  border-width:0 0 0 1px;
+  font-size:inherit;
+  margin:0;
+  overflow:visible;
+  padding:.5em 1em
 }
 
 a:link,
