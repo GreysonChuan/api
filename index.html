@@ -152,18 +152,18 @@ URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of t
           </tbody>
         </table>
 
-        <p>URL: msmpos://? 
-params: return_url=&amp;pwd=&amp;return_key=&amp;type=S&amp;amount=&amp;tip_amount=&amp;reference_no=&amp; </p>
+        <p>URL: msmpos://?<br />
+params: return_url=&amp;pwd=&amp;return_key=&amp;type=S&amp;amount=&amp;tip_amount=&amp;reference_no=&amp;  </p>
 
         <p>Note that the return_url needs to be URL-encoded</p>
 
-        <p>Example: 
+        <p>Example:<br />
 Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;reference_no=INV14110021&amp;type=S&amp;amount=0.20&amp;pwd=1234 </p>
       </li>
       <li>
-        <p>Void Transaction Request Parameters 
-URL: msmpos://? 
-params: return_url=&amp;pwd=&amp;return_key=&amp;type=V&amp;receipt_no=&amp; </p>
+        <p>Void Transaction Request Parameters<br />
+URL: msmpos://?<br />
+params: return_url=&amp;pwd=&amp;return_key=&amp;type=V&amp;receipt_no=&amp;  </p>
 
         <p>Request Parameters:</p>
 
@@ -232,7 +232,7 @@ params: return_url=&amp;pwd=&amp;return_key=&amp;type=V&amp;receipt_no=&amp; </p
 
         <p>Note that the return_url needs to be URL-encoded</p>
 
-        <p>Example:
+        <p>Example:<br />
 Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;receipt_no=20141204000001&amp;type=V&amp;pwd=1234 </p>
       </li>
     </ol>
@@ -240,7 +240,7 @@ Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_ke
     <hr />
   </li>
   <li>
-    <p>Add a notification observer to receive the response results from ffastpay</p>
+    <p>Add a notification observer to receive the response results from ffastpay </p>
 
     <pre><code>
  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setResult:) name:@"RECEIVED_RESULT" object:nil];
@@ -248,7 +248,7 @@ Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_ke
 
     <ol>
       <li>
-        <p>Sale Transaction Response Data</p>
+        <p>Sale Transaction Response Data </p>
 
         <p>Returned as NSDictionary:</p>
 
