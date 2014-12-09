@@ -1,0 +1,165 @@
+Crashlog created at 2014-11-21 16:43:38 +0800
+
+===== MESSAGE:
+
+NoMethodError: undefined method `dir' for Test:Module
+
+===== COMPILATION STACK:
+
+  - [item]   / (rep default)
+
+===== STACK TRACE:
+
+  0. layout /default/:22:in `get_binding'
+  1. c:/Ruby193/lib/ruby/1.9.1/erb.rb:838:in `eval'
+  2. c:/Ruby193/lib/ruby/1.9.1/erb.rb:838:in `result'
+  3. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/filters/erb.rb:34:in `run'
+  4. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/filter.rb:121:in `setup_and_run'
+  5. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/result_data/item_rep.rb:403:in `layout'
+  6. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/item_rep_proxy.rb:69:in `layout'
+  7. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/rule_context.rb:74:in `layout'
+  8. e:/D/Republic Polytechnic/Year 3/Intern/api/Rules:19:in `block in parse'
+  9. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/rule.rb:70:in `instance_eval'
+  10. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/rule.rb:70:in `apply_to'
+  11. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/compiler.rb:386:in `compile_rep'
+  12. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/compiler.rb:342:in `block in compile_reps'
+  13. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/compiler.rb:335:in `loop'
+  14. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/compiler.rb:335:in `compile_reps'
+  15. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/compilation/compiler.rb:89:in `run'
+  16. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/base/source_data/site.rb:59:in `compile'
+  17. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/commands/compile.rb:397:in `block in run'
+  18. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/commands/compile.rb:438:in `run_listeners_while'
+  19. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/commands/compile.rb:396:in `run'
+  20. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/command_runner.rb:14:in `block in call'
+  21. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/error_handler.rb:74:in `handle_while'
+  22. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/error_handler.rb:26:in `handle_while'
+  23. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/command_runner.rb:13:in `call'
+  24. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib/cri/command_dsl.rb:223:in `block in runner'
+  25. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib/cri/command.rb:298:in `call'
+  26. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib/cri/command.rb:298:in `run_this'
+  27. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib/cri/command.rb:251:in `run'
+  28. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/commands/nanoc.rb:39:in `block in define'
+  29. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib/cri/command.rb:298:in `call'
+  30. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib/cri/command.rb:298:in `run_this'
+  31. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib/cri/command.rb:251:in `run'
+  32. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli.rb:59:in `block in run'
+  33. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/error_handler.rb:74:in `handle_while'
+  34. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli/error_handler.rb:26:in `handle_while'
+  35. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib/nanoc/cli.rb:57:in `run'
+  36. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/bin/nanoc:25:in `<top (required)>'
+  37. c:/Ruby193/bin/nanoc:23:in `load'
+
+===== VERSION INFORMATION:
+
+nanoc 3.7.3 © 2007-2014 Denis Defreyne.
+Running ruby 1.9.3 (2014-10-27) on i386-mingw32 with RubyGems 2.4.2.
+
+===== SYSTEM INFORMATION:
+
+MINGW32_NT-6.2 GREYSON 1.0.12(0.46/3/2) 2012-07-05 14:56 i686 unknown
+
+===== INSTALLED GEMS:
+
+  adsf 1.2.0
+  bigdecimal 1.1.0
+  coderay 1.1.0
+  colored 1.2
+  cri 2.6.1
+  ffi 1.9.6
+  formatador 0.2.5
+  gcloud 0.0.7
+  git 1.2.8
+  io-console 0.3
+  json 1.5.5
+  kramdown 1.5.0
+  lumberjack 1.0.9
+  method_source 0.8.2
+  minitest 2.5.1, 5.4.2
+  nanoc 3.7.3
+  pry 0.10.1
+  rack 1.5.2
+  rake 0.9.2.2, 10.3.2
+  rb-fsevent 0.9.4
+  rb-inotify 0.9.5
+  rdoc 3.9.5, 4.1.2
+  rubygems-update 2.4.2
+  slop 3.6.0
+  win32console 1.3.2
+
+===== ENVIRONMENT:
+
+!:: => "::\\"
+ALLUSERSPROFILE => "C:\\ProgramData"
+APPDATA => "C:\\Users\\BYEgreyson\\AppData\\Roaming"
+ASL.LOG => "Destination=file"
+COMMONPROGRAMFILES => "C:\\Program Files (x86)\\Common Files"
+COMMONPROGRAMFILES(X86) => "C:\\Program Files (x86)\\Common Files"
+COMMONPROGRAMW6432 => "C:\\Program Files\\Common Files"
+COMPUTERNAME => "GREYSON"
+COMSPEC => "C:\\WINDOWS\\system32\\cmd.exe"
+FP_NO_HOST_CHECK => "NO"
+GNUPGHOME => "c:/Users/BYEgreyson/.gnupg"
+HISTFILE => "c:/Users/BYEgreyson/.bash_history"
+HOME => "c:/Users/BYEgreyson"
+HOMEDRIVE => "C:"
+HOMEPATH => "\\Users\\BYEgreyson"
+INPUTRC => "C:/Program Files (x86)/Git/etc/inputrc"
+LESS => "-FRSX"
+LESSCHARSET => "utf-8"
+LOCALAPPDATA => "C:\\Users\\BYEgreyson\\AppData\\Local"
+LOGNAME => "BYEgreyson"
+LOGONSERVER => "\\\\MicrosoftAccount"
+MAKE_MODE => "unix"
+MSYSTEM => "MINGW32"
+NUMBER_OF_PROCESSORS => "4"
+OLDPWD => "e:/D/Republic Polytechnic/Year 3/Intern/api/output"
+OS => "Windows_NT"
+PATH => "c:\\Users\\BYEgreyson\\bin;.;C:\\Program Files (x86)\\Git\\local\\bin;C:\\Program Files (x86)\\Git\\mingw\\bin;C:\\Program Files (x86)\\Git\\bin;C:\\Program Files (x86)\\Git\\bin;c:\\WINDOWS\\system32;c:\\WINDOWS;c:\\WINDOWS\\System32\\Wbem;c:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;c:\\Program Files (x86)\\Microsoft ASP.NET\\ASP.NET Web Pages\\v1.0\\;c:\\Program Files\\Microsoft SQL Server\\110\\Tools\\Binn\\;c:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;d:\\Program Files (x86)\\GNU\\GnuPG\\pub;c:\\Program Files (x86)\\MySQL\\MySQL Utilities\\;c:\\Program Files\\Microsoft\\Web Platform Installer\\;c:\\Program Files (x86)\\Microsoft SDKs\\TypeScript\\1.0\\;c:\\Users\\BYEgreyson\\AppData\\Local\\Smartbar\\Application\\;C:\\Program Files (x86)\\Git\\cmd;c:\\Ruby193\\bin"
+PATHEXT => ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW"
+PLINK_PROTOCOL => "ssh"
+PROCESSOR_ARCHITECTURE => "x86"
+PROCESSOR_ARCHITEW6432 => "AMD64"
+PROCESSOR_IDENTIFIER => "Intel64 Family 6 Model 37 Stepping 5, GenuineIntel"
+PROCESSOR_LEVEL => "6"
+PROCESSOR_REVISION => "2505"
+PROGRAMDATA => "C:\\ProgramData"
+PROGRAMFILES => "C:\\Program Files (x86)"
+PROGRAMFILES(X86) => "C:\\Program Files (x86)"
+PROGRAMW6432 => "C:\\Program Files"
+PROMPT => "$P$G"
+PSMODULEPATH => "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\"
+PUBLIC => "C:\\Users\\Public"
+PWD => "e:/D/Republic Polytechnic/Year 3/Intern/api"
+SESSIONNAME => "Console"
+SHLVL => "3"
+SYSTEMDRIVE => "C:"
+SYSTEMROOT => "C:\\WINDOWS"
+TEMP => "C:/Users/BYEGRE~1/AppData/Local/Temp"
+TERM => "cygwin"
+TMP => "C:/Users/BYEGRE~1/AppData/Local/Temp"
+USER => "BYEgreyson"
+USERDOMAIN => "GREYSON"
+USERDOMAIN_ROAMINGPROFILE => "GREYSON"
+USERNAME => "BYEgreyson"
+USERPROFILE => "C:\\Users\\BYEgreyson"
+VS110COMNTOOLS => "C:\\Program Files (x86)\\Microsoft Visual Studio 11.0\\Common7\\Tools\\"
+VS120COMNTOOLS => "D:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Common7\\Tools\\"
+WINDIR => "C:\\WINDOWS"
+_ => "c:/Ruby193/bin/nanoc"
+
+===== LOAD PATHS:
+
+  0. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib
+  1. c:/Ruby193/lib/ruby/gems/1.9.1/gems/colored-1.2/lib
+  2. c:/Ruby193/lib/ruby/gems/1.9.1/gems/cri-2.6.1/lib
+  3. c:/Ruby193/lib/ruby/gems/1.9.1/gems/nanoc-3.7.3/lib
+  4. c:/Ruby193/lib/ruby/gems/1.9.1/gems/win32console-1.3.2-x86-mingw32/lib
+  5. c:/Ruby193/lib/ruby/gems/1.9.1/gems/kramdown-1.5.0/lib
+  6. c:/Ruby193/lib/ruby/site_ruby/1.9.1
+  7. c:/Ruby193/lib/ruby/site_ruby/1.9.1/i386-msvcrt
+  8. c:/Ruby193/lib/ruby/site_ruby
+  9. c:/Ruby193/lib/ruby/vendor_ruby/1.9.1
+  10. c:/Ruby193/lib/ruby/vendor_ruby/1.9.1/i386-msvcrt
+  11. c:/Ruby193/lib/ruby/vendor_ruby
+  12. c:/Ruby193/lib/ruby/1.9.1
+  13. c:/Ruby193/lib/ruby/1.9.1/i386-mingw32

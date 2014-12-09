@@ -1,0 +1,1206 @@
+{:	data{I"/:ET{:default{	:	lastI"o.<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A Brand New nanoc Site - Home</title>
+    <link rel="stylesheet" href="/api/stylesheet.css">
+
+    <!-- you don't need to keep this, but it's cool for stats! -->
+    <meta name="generator" content="nanoc 3.7.3">
+  </head>
+  <body>
+    <div id="main">
+      
+<h1 id="mpos-api-105-reference">mPOS api 1.0.5 Reference</h1>
+
+<p>The mPOS api allows app developers to launch the POGO mPOS app from within their own apps and do payment / void transactions with it.</p>
+
+<p><strong>Guide:</strong></p>
+
+<hr />
+
+<ol>
+  <li>
+    <p>Set up return URL for ffastpay to return to your app on completion of a transaction at ffastpay:	</p>
+
+    <ol>
+      <li>Go to Project Target &gt; Info </li>
+      <li>Add URL Types 
+Identifier: <yourappbundleid> e.g. com.ffastpay.mpos.URLSchemeDemo 
+URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters) </yourappurlscheme></yourappbundleid></li>
+    </ol>
+
+    <hr />
+  </li>
+  <li>
+    <p>Implement the handleOpenURL method in your AppDelegate. </p>
+
+    <ol>
+      <li>When this method is called in your app, the ffastpay url scheme is passed to ffastpay app delegate.</li>
+      <li>Post a notification for the receipt of response data from ffastpay.</li>
+    </ol>
+
+    <pre><code>
+ - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+ {
+     NSString *query = [url query];
+         NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @"msg"
+                                , nil];
+		
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"RECEIVED_RESULT" object:self userInfo:resultDic];
+		
+     return YES;
+ }
+ </code></pre>
+    <p><br /></p>
+
+    <hr />
+  </li>
+  <li>
+    <p>Call your application’s openURL method with ffastpay’s URL and parameters to launch a ffastpay transaction:</p>
+
+    <pre><code>
+ - (IBAction)sendData:(id)sender {
+     [self closeKeyboard:sender];
+
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self makeURL]]];
+ }
+ </code></pre>
+
+    <ol>
+      <li>
+        <p>Sale Transaction Request Parameters</p>
+
+        <p>Request Parameters:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_url</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Your app URL Scheme</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>pwd</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Password for FDMS mPOS</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>S: Sale</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td>For sale / except GST &amp; Service</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>tip_amount</td>
+              <td>O</td>
+              <td>N</td>
+              <td>10</td>
+              <td>Tip amount</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>reference_no</td>
+              <td>O</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Reference number in mPOS app</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pair to return</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>URL: msmpos://?<br />
+params: return_url=&amp;pwd=&amp;return_key=&amp;type=S&amp;amount=&amp;tip_amount=&amp;reference_no=&amp;  </p>
+
+        <p>Note that the return_url needs to be URL-encoded</p>
+
+        <p>Example:<br />
+Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;reference_no=INV14110021&amp;type=S&amp;amount=0.20&amp;pwd=1234 </p>
+      </li>
+      <li>
+        <p>Void Transaction Request Parameters<br />
+URL: msmpos://?<br />
+params: return_url=&amp;pwd=&amp;return_key=&amp;type=V&amp;receipt_no=&amp;  </p>
+
+        <p>Request Parameters:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_url</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Your app URL Scheme</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>pwd</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Password for FDMS mPOS</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>V: Void</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>receipt_no</td>
+              <td>M</td>
+              <td>N</td>
+              <td>14</td>
+              <td>Receipt number of transaction to void</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pair to return</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Note that the return_url needs to be URL-encoded</p>
+
+        <p>Example:<br />
+Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;receipt_no=20141204000001&amp;type=V&amp;pwd=1234 </p>
+      </li>
+    </ol>
+
+    <hr />
+  </li>
+  <li>
+    <p>Add a notification observer to receive the response results from ffastpay </p>
+
+    <pre><code>
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setResult:) name:@"RECEIVED_RESULT" object:nil];
+ </code></pre>
+
+    <ol>
+      <li>
+        <p>Sale Transaction Response Data </p>
+
+        <p>Returned as NSDictionary:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description / Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>result_code</td>
+              <td>M</td>
+              <td>A</td>
+              <td>4</td>
+              <td>0000: Succeed <br /> Others: Failed</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>result_message</td>
+              <td>M</td>
+              <td>A</td>
+              <td> </td>
+              <td>SUCCEED / Failed Message</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>S: Sale</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>receipt_no</td>
+              <td>M</td>
+              <td>AN</td>
+              <td>14</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>sales_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td> </td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>tip_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>gst_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>service_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>total_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td>sales_amount + tip_amount + gst_amount + service_amount</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pairs</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <p>Void Transaction Response Data</p>
+
+        <p>Returned as NSDictionary:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description / Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>result_code</td>
+              <td>M</td>
+              <td>A</td>
+              <td>4</td>
+              <td>0000: Succeed <br /> Others: Failed</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>result_message</td>
+              <td>M</td>
+              <td>A</td>
+              <td> </td>
+              <td>SUCCEED / Failed Message</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>V: Void</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>receipt_no</td>
+              <td>M</td>
+              <td>AN</td>
+              <td>14</td>
+              <td>For void</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pairs</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+
+    </div>
+    <div id="sidebar">
+      <h2>Table of contents</h2>
+      <ul>
+        
+<li><a href="/api//index.html">Home</a></li></ul>
+    </div>
+  </body>
+</html>;T:rawI"a
+# mPOS api 1.0.5 Reference 
+
+The mPOS api allows app developers to launch the POGO mPOS app from within their own apps and do payment / void transactions with it.
+
+**Guide:**
+
+--------------------
+
+1. Set up return URL for ffastpay to return to your app on completion of a transaction at ffastpay:	
+
+	1. Go to Project Target > Info 
+	2. Add URL Types 
+	   Identifier: <YourAppBundleID> e.g. com.ffastpay.mpos.URLSchemeDemo 
+	   URL Scheme: <YourAppURLScheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters) 
+
+	--------------------
+	   
+2. Implement the handleOpenURL method in your AppDelegate. 
+
+	1. When this method is called in your app, the ffastpay url scheme is passed to ffastpay app delegate.
+	2. Post a notification for the receipt of response data from ffastpay.
+
+	<pre><code>
+	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+	{
+		NSString *query = [url query];
+			NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @"msg"
+								   , nil];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"RECEIVED_RESULT" object:self userInfo:resultDic];
+		
+		return YES;
+	}
+	</code></pre><br/>
+	  
+	--------------------
+
+3. Call your application's openURL method with ffastpay's URL and parameters to launch a ffastpay transaction:
+
+	<pre><code>
+	- (IBAction)sendData:(id)sender {
+		[self closeKeyboard:sender];
+
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self makeURL]]];
+	}
+	</code></pre>
+		
+	1. Sale Transaction Request Parameters
+	
+	   Request Parameters:
+
+	   No | Name         | Mandatory(M) / Optional(O) | Type | Length | Description
+	   -- | ----         | -------------------------- | ---- | ------ | -----------
+	   1  | return_url   | M                          | AN   |        | Your app URL Scheme
+	   2  | pwd          | M                          | AN   |        | Password for FDMS mPOS
+	   3  | return_key   | M                          | AN   |        | Unique key for order identification
+	   4  | type         | M                          | A    | 1      | S: Sale
+	   5  | amount       | M                          | N    | 10     | For sale / except GST & Service
+	   6  | tip_amount   | O                          | N    | 10     | Tip amount
+	   7  | reference_no | O                          | AN   |        | Reference number in mPOS app
+	   8  | any others   | O                          |      |        | Any other key & value pair to return
+
+
+	   URL: msmpos://?  
+	   params: return_url=&pwd=&return_key=&type=S&amount=&tip_amount=&reference_no=&  
+
+	   Note that the return_url needs to be URL-encoded
+
+	   Example:  
+	   Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&return_key=INV14110021&reference_no=INV14110021&type=S&amount=0.20&pwd=1234 
+
+	2. Void Transaction Request Parameters  
+	   URL: msmpos://?  
+	   params: return_url=&pwd=&return_key=&type=V&receipt_no=&  
+
+
+	   Request Parameters:
+
+	   No | Name         | Mandatory(M) / Optional(O) | Type | Length | Description
+	   -- | ----         | -------------------------- | ---- | ------ | -----------
+	   1  | return_url	 | M                          | AN   |        | Your app URL Scheme
+	   2  | pwd          | M                          | AN   |        | Password for FDMS mPOS
+	   3  | return_key   | M                          | AN   |        | Unique key for order identification
+	   4  | type         | M                          | A    | 1      | V: Void
+	   5  | receipt_no   | M                          | N    | 14     | Receipt number of transaction to void
+	   6  | any others   | O                          |      |        | Any other key & value pair to return
+
+	   Note that the return_url needs to be URL-encoded
+
+	   Example:  
+	   Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&return_key=INV14110021&receipt_no=20141204000001&type=V&pwd=1234 
+	   
+	--------------------
+
+4. Add a notification observer to receive the response results from ffastpay 
+
+	<pre><code>
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setResult:) name:@"RECEIVED_RESULT" object:nil];
+	</code></pre>
+
+	1. Sale Transaction Response Data 
+
+	   Returned as NSDictionary:
+
+	   No | Name           | Mandatory(M) / Optional(O) | Type | Length | Description / Value
+	   -- | ----           | -------------------------- | ---- | ------ | -------------------
+	   1  | return_key	   | M                          | AN   |        | Unique key for order identification
+	   2  | result_code    | M                          | A    | 4      | 0000: Succeed <br/> Others: Failed	
+	   3  | result_message | M                          | A    |        | SUCCEED / Failed Message
+	   4  | type           | M                          | A    | 1      | S: Sale
+	   5  | receipt_no     | M                          | AN   | 14     |
+	   6  | sales_amount   | M                          | N    |        |
+	   7  | tip_amount     | M                          | N    | 10     |
+	   8  | gst_amount     | M                          | N    | 10     |
+	   9  | service_amount | M                          | N    | 10     |
+	   10 | total_amount   | M                          | N    | 10     | sales_amount + tip_amount + gst_amount + service_amount
+	   11 | any others     | O                          |      |        | Any other key & value pairs
+
+	2. Void Transaction Response Data
+
+	   Returned as NSDictionary:
+
+	   No | Name           | Mandatory(M) / Optional(O) | Type | Length | Description / Value
+	   -- | ----           | -------------------------- | ---- | ------ | -------------------
+	   1  | return_key	   | M                          | AN   |        | Unique key for order identification
+	   2  | result_code    | M                          | A    | 4      | 0000: Succeed <br/> Others: Failed	
+	   3  | result_message | M                          | A    |        | SUCCEED / Failed Message
+	   4  | type           | M                          | A    | 1      | V: Void
+	   5  | receipt_no     | M                          | AN   | 14     | For void
+	   6  | any others     | O                          |      |        | Any other key & value pairs
+
+
+
+
+
+
+ 
+
+
+
+  ;T:preI"y,
+<h1 id="mpos-api-105-reference">mPOS api 1.0.5 Reference</h1>
+
+<p>The mPOS api allows app developers to launch the POGO mPOS app from within their own apps and do payment / void transactions with it.</p>
+
+<p><strong>Guide:</strong></p>
+
+<hr />
+
+<ol>
+  <li>
+    <p>Set up return URL for ffastpay to return to your app on completion of a transaction at ffastpay:	</p>
+
+    <ol>
+      <li>Go to Project Target &gt; Info </li>
+      <li>Add URL Types 
+Identifier: <yourappbundleid> e.g. com.ffastpay.mpos.URLSchemeDemo 
+URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters) </yourappurlscheme></yourappbundleid></li>
+    </ol>
+
+    <hr />
+  </li>
+  <li>
+    <p>Implement the handleOpenURL method in your AppDelegate. </p>
+
+    <ol>
+      <li>When this method is called in your app, the ffastpay url scheme is passed to ffastpay app delegate.</li>
+      <li>Post a notification for the receipt of response data from ffastpay.</li>
+    </ol>
+
+    <pre><code>
+ - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+ {
+     NSString *query = [url query];
+         NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @"msg"
+                                , nil];
+		
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"RECEIVED_RESULT" object:self userInfo:resultDic];
+		
+     return YES;
+ }
+ </code></pre>
+    <p><br /></p>
+
+    <hr />
+  </li>
+  <li>
+    <p>Call your application’s openURL method with ffastpay’s URL and parameters to launch a ffastpay transaction:</p>
+
+    <pre><code>
+ - (IBAction)sendData:(id)sender {
+     [self closeKeyboard:sender];
+
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self makeURL]]];
+ }
+ </code></pre>
+
+    <ol>
+      <li>
+        <p>Sale Transaction Request Parameters</p>
+
+        <p>Request Parameters:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_url</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Your app URL Scheme</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>pwd</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Password for FDMS mPOS</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>S: Sale</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td>For sale / except GST &amp; Service</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>tip_amount</td>
+              <td>O</td>
+              <td>N</td>
+              <td>10</td>
+              <td>Tip amount</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>reference_no</td>
+              <td>O</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Reference number in mPOS app</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pair to return</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>URL: msmpos://?<br />
+params: return_url=&amp;pwd=&amp;return_key=&amp;type=S&amp;amount=&amp;tip_amount=&amp;reference_no=&amp;  </p>
+
+        <p>Note that the return_url needs to be URL-encoded</p>
+
+        <p>Example:<br />
+Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;reference_no=INV14110021&amp;type=S&amp;amount=0.20&amp;pwd=1234 </p>
+      </li>
+      <li>
+        <p>Void Transaction Request Parameters<br />
+URL: msmpos://?<br />
+params: return_url=&amp;pwd=&amp;return_key=&amp;type=V&amp;receipt_no=&amp;  </p>
+
+        <p>Request Parameters:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_url</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Your app URL Scheme</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>pwd</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Password for FDMS mPOS</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>V: Void</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>receipt_no</td>
+              <td>M</td>
+              <td>N</td>
+              <td>14</td>
+              <td>Receipt number of transaction to void</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pair to return</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Note that the return_url needs to be URL-encoded</p>
+
+        <p>Example:<br />
+Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_key=INV14110021&amp;receipt_no=20141204000001&amp;type=V&amp;pwd=1234 </p>
+      </li>
+    </ol>
+
+    <hr />
+  </li>
+  <li>
+    <p>Add a notification observer to receive the response results from ffastpay </p>
+
+    <pre><code>
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setResult:) name:@"RECEIVED_RESULT" object:nil];
+ </code></pre>
+
+    <ol>
+      <li>
+        <p>Sale Transaction Response Data </p>
+
+        <p>Returned as NSDictionary:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description / Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>result_code</td>
+              <td>M</td>
+              <td>A</td>
+              <td>4</td>
+              <td>0000: Succeed <br /> Others: Failed</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>result_message</td>
+              <td>M</td>
+              <td>A</td>
+              <td> </td>
+              <td>SUCCEED / Failed Message</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>S: Sale</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>receipt_no</td>
+              <td>M</td>
+              <td>AN</td>
+              <td>14</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>sales_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td> </td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>tip_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>gst_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>service_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>total_amount</td>
+              <td>M</td>
+              <td>N</td>
+              <td>10</td>
+              <td>sales_amount + tip_amount + gst_amount + service_amount</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pairs</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <p>Void Transaction Response Data</p>
+
+        <p>Returned as NSDictionary:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Mandatory(M) / Optional(O)</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Description / Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>return_key</td>
+              <td>M</td>
+              <td>AN</td>
+              <td> </td>
+              <td>Unique key for order identification</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>result_code</td>
+              <td>M</td>
+              <td>A</td>
+              <td>4</td>
+              <td>0000: Succeed <br /> Others: Failed</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>result_message</td>
+              <td>M</td>
+              <td>A</td>
+              <td> </td>
+              <td>SUCCEED / Failed Message</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>type</td>
+              <td>M</td>
+              <td>A</td>
+              <td>1</td>
+              <td>V: Void</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>receipt_no</td>
+              <td>M</td>
+              <td>AN</td>
+              <td>14</td>
+              <td>For void</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>any others</td>
+              <td>O</td>
+              <td> </td>
+              <td> </td>
+              <td>Any other key &amp; value pairs</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+;T:	post@
+I"/stylesheet/;T{;{;I"* {
+  margin: 0;
+  padding: 0;
+
+  font-family: Georgia, Palatino, serif;
+}
+
+body {
+  background: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+pre {
+  font-family: Courier, Consolas, monospace;
+  font-size: 13px;
+  line-height: 18px;
+  /*tab-interval: 0.5em;*/
+  border: 1px solid #C7CFD5;
+  background-color: #F1F5F9;
+  color: #666;
+}
+
+code {
+  font-family: Courier, Consolas, monospace;
+  font-size: 13px;
+  color: #666;
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+  empty-cells:show;
+  border:1px solid #cbcbcb
+}
+
+tbody>tr:last-child td {
+  border-bottom-width:0
+}
+
+td:first-child, th:first-child {
+  border-left-width:0
+}
+
+thead {
+  background:#e0e0e0;
+  color:#000;
+  text-align:left;
+  vertical-align:bottom
+}
+
+td {
+  background-color:transparent
+}
+
+
+td, th{
+  border-width:0 0 1px;
+  border-bottom:1px solid #cbcbcb;
+  
+  font-size:inherit;
+  margin:0;
+  overflow:visible;
+  padding:.5em 1em
+}
+
+table tr:hover td {
+	background: #f2f2f2;
+}
+
+a:link,
+a:visited {
+  color: #f30;
+}
+
+a:hover {
+  color: #f90;
+}
+
+#main {
+  position: absolute;
+  float: right;
+  top: 40px;
+  left: 280px;
+
+  width: 78%;
+}
+
+#main h1 {
+  font-size: 40px;
+  font-weight: normal;
+
+  line-height: 40px;
+
+  letter-spacing: -1px;
+}
+
+#main p {
+  margin: 20px 0;
+
+  font-size: 15px;
+
+  line-height: 20px;
+}
+
+#main ul, #main ol {
+  margin: 20px;
+}
+
+#main li {
+  font-size: 15px;
+
+  line-height: 20px;
+}
+
+#main ul li {
+  list-style-type: none;
+}
+
+#main ul li:before { 
+  content:"-"; 
+  position:relative; 
+  left:-5px;
+}
+
+#sidebar {
+  position: absolute;
+
+  top: 40px;
+  left: 20px;
+  width: 15%;
+
+  padding: 20px 20px 0 0;
+
+  border-right: 1px solid #ccc;
+
+  text-align: right;
+}
+
+#sidebar h2 {
+  text-transform: uppercase;
+
+  font-size: 13px;
+
+  color: #333;
+
+  letter-spacing: 1px;
+
+  line-height: 20px;
+}
+
+#main h2{
+  text-transform: uppercase;
+
+  font-size: 20px;
+
+  color: #d2431b;
+
+  letter-spacing: 1px;
+
+  line-height: 20px;
+}
+
+#sidebar ul {
+  list-style-type: none;
+
+  margin: 20px 0;
+}
+
+#sidebar li {
+  font-size: 14px;
+
+  line-height: 20px;
+}
+;T;	@;
+@I"/about_us/;T{;{	;I";<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>About us</title>
+    <link rel="stylesheet" href="/api/stylesheet.css">
+
+    <!-- you don't need to keep this, but it's cool for stats! -->
+    <meta name="generator" content="nanoc 3.7.3">
+  </head>
+  <body>
+    <div id="main">
+      
+<h2 id="about-us">About us</h2>
+
+    </div>
+    <div id="sidebar">
+      <h2>Table of contents</h2>
+      <ul>
+        
+<li><a href="/api//index.html">Home</a></li><li><a href="/api//about_us/index.html">About Us</a></li></ul>
+    </div>
+  </body>
+</html>;T;	I"
+## About us;T;
+I"&
+<h2 id="about-us">About us</h2>
+;T;@:versioni
