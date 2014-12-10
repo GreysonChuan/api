@@ -21,13 +21,13 @@
 
 <ol>
   <li>
-    <p>Set up return URL for ffastpay to return to your app on completion of a transaction at ffastpay:	</p>
+    <p>Set up return URL for POGO to return to your app on completion of a transaction at POGO:	</p>
 
     <ol>
       <li>Go to Project Target &gt; Info </li>
-      <li>Add URL Types 
-Identifier: <yourappbundleid> e.g. com.ffastpay.mpos.URLSchemeDemo 
-URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters) </yourappurlscheme></yourappbundleid></li>
+      <li>Add URL Types<br />
+Identifier: <yourappbundleid> e.g. com.POGO.mpos.URLSchemeDemo  
+URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters)  </yourappurlscheme></yourappbundleid></li>
     </ol>
 
     <hr />
@@ -36,8 +36,8 @@ URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of t
     <p>Implement the handleOpenURL method in your AppDelegate. </p>
 
     <ol>
-      <li>When this method is called in your app, the ffastpay url scheme is passed to ffastpay app delegate.</li>
-      <li>Post a notification for the receipt of response data from ffastpay.</li>
+      <li>When this method is called in your app, the POGO url scheme is passed to POGO app delegate.</li>
+      <li>Post a notification for the receipt of response data from POGO.</li>
     </ol>
 
     <pre><code>
@@ -57,7 +57,7 @@ URL Scheme: <yourappurlscheme> e.g. DemoMSMPos (This will be passed as part of t
     <hr />
   </li>
   <li>
-    <p>Call your application’s openURL method with ffastpay’s URL and parameters to launch a ffastpay transaction:</p>
+    <p>Call your application’s openURL method with POGO’s URL and parameters to launch a POGO transaction:</p>
 
     <pre><code>
  - (IBAction)sendData:(id)sender {
@@ -240,7 +240,7 @@ Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_ke
     <hr />
   </li>
   <li>
-    <p>Add a notification observer to receive the response results from ffastpay </p>
+    <p>Add a notification observer to receive the response results from POGO </p>
 
     <pre><code>
  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setResult:) name:@"RECEIVED_RESULT" object:nil];
