@@ -18,7 +18,8 @@ table {
 }
 
 pre {
-  width: 100%;
+  width: auto;
+  overflow: auto;
   font-family: Courier, Consolas, monospace;
   font-size: 13px;
   line-height: 18px;
