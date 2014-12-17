@@ -14,8 +14,8 @@ The mPOS api allows app developers to launch the POGO mPOS app from within their
 
 	1. Go to Project Target > Info 
 	2. Add URL Types  
-	   Identifier: <YourAppBundleID> e.g. com.POGO.mpos.URLSchemeDemo  <br/>
-	   URL Scheme: <YourAppURLScheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters)  
+	   Identifier: &lt;YourAppBundleID&gt; e.g. com.ffastpay.mpos.URLSchemeDemo  <br/>
+	   URL Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters)  
 
 	--------------------
 	   
