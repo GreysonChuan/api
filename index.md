@@ -10,19 +10,19 @@ The mPOS api allows app developers to launch the POGO mPOS app from within their
 
 --------------------
 
-1. Set up return URL for ffastpay to return to your app on completion of a transaction at ffastpay:	
+1. Set up return URL for POGO to return to your app on completion of a transaction at POGO:	
 
 	1. Go to Project Target > Info 
-	2. Add URL Types 
-	   Identifier: <YourAppBundleID> e.g. com.ffastpay.mpos.URLSchemeDemo 
-	   URL Scheme: <YourAppURLScheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters) 
+	2. Add URL Types  
+	   Identifier: <YourAppBundleID> e.g. com.POGO.mpos.URLSchemeDemo  <br/>
+	   URL Scheme: <YourAppURLScheme> e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters)  
 
 	--------------------
 	   
 2. Implement the handleOpenURL method in your AppDelegate. 
 
-	1. When this method is called in your app, the ffastpay url scheme is passed to ffastpay app delegate.
-	2. Post a notification for the receipt of response data from ffastpay.
+	1. When this method is called in your app, the POGO url scheme is passed to POGO app delegate.
+	2. Post a notification for the receipt of response data from POGO.
 
 	<pre><code>
 	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
@@ -39,7 +39,7 @@ The mPOS api allows app developers to launch the POGO mPOS app from within their
 	  
 	--------------------
 
-3. Call your application's openURL method with ffastpay's URL and parameters to launch a ffastpay transaction:
+3. Call your application's openURL method with POGO's URL and parameters to launch a POGO transaction:
 
 	<pre><code>
 	- (IBAction)sendData:(id)sender {
@@ -96,7 +96,7 @@ The mPOS api allows app developers to launch the POGO mPOS app from within their
 	   
 	--------------------
 
-4. Add a notification observer to receive the response results from ffastpay 
+4. Add a notification observer to receive the response results from POGO 
 
 	<pre><code>
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setResult:) name:@"RECEIVED_RESULT" object:nil];
