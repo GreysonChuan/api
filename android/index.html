@@ -54,7 +54,9 @@ Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as part of
  private String generateURL(){
      String returnScheme= Uri.encode("DemoMSMPos://?transactionreturn=true");
 
-     String uri = String.format("msmpos://?return_url=%s&amp;pwd=%s&amp;return_key=%s&amp;type=S&amp;amount=%s&amp;tip_amount=%s&amp;reference_no=%s", returnScheme, pwd.getText(), return_key.getText().toString(), amt.getText().toString(), tip_amt.getText().toString(), ref_no.getText().toString());
+     String uri = String.format("msmpos://?return_url=%s&amp;pwd=%s&amp;return_key=%s&amp;type=S&amp;amount=%s&amp;tip_amount=%s&amp;reference_no=%s", 
+                     returnScheme, pwd.getText(), return_key.getText().toString(), amt.getText().toString(), 
+                     tip_amt.getText().toString(), ref_no.getText().toString());
      return uri;
  }
  </code></pre>
@@ -266,7 +268,7 @@ Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_ke
       <li>
         <p>Sale Transaction Response Data </p>
 
-        <p>Returned as NSDictionary:</p>
+        <p>Returned as String:</p>
 
         <table>
           <thead>
@@ -374,7 +376,7 @@ Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_ke
       <li>
         <p>Void Transaction Response Data</p>
 
-        <p>Returned as NSDictionary:</p>
+        <p>Returned as String:</p>
 
         <table>
           <thead>
