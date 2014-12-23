@@ -29,10 +29,9 @@ The mPOS api allows app developers to launch the POGO mPOS app from within their
 
 	--------------------
 	   
-2. Implement the handleOpenURL method in your AppDelegate. 
+2. Implement the generateURL method in your AppDelegate. 
 
-	1. When this method is called in your app, the POGO url scheme is passed to POGO app delegate.
-	2. Post a notification for the receipt of response data from POGO.
+	1. When this method is called in your app, the POGO url scheme will be created.
 
 	<pre><code>
 	private String generateURL(){
