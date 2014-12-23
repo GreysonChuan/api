@@ -43,11 +43,10 @@ Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as part of
     <hr />
   </li>
   <li>
-    <p>Implement the handleOpenURL method in your AppDelegate. </p>
+    <p>Implement the generateURL method in your AppDelegate. </p>
 
     <ol>
-      <li>When this method is called in your app, the POGO url scheme is passed to POGO app delegate.</li>
-      <li>Post a notification for the receipt of response data from POGO.</li>
+      <li>When this method is called in your app, the POGO url scheme will be created.</li>
     </ol>
 
     <pre><code>
