@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>A Brand New nanoc Site - Home</title>
+    <title>A Brand New nanoc Site - Android</title>
     <link rel="stylesheet" href="/api/stylesheet.css">
 
     <!-- you don't need to keep this, but it's cool for stats! -->
@@ -24,11 +24,21 @@
     <p>Set up return URL for POGO to return to your app on completion of a transaction at POGO:	</p>
 
     <ol>
-      <li>Go to Project Target &gt; Info </li>
-      <li>Add URL Types<br />
-Identifier: &lt;YourAppBundleID&gt; e.g. com.ffastpay.mpos.URLSchemeDemo  <br />
-URL Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters)  </li>
+      <li>Go to AndroidManifest.xml</li>
+      <li>Add the &lt;intent-filter&gt; to the activity that will be receiving response data from POGO.<br />
+Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as part of the return URL in the request parameters)  </li>
     </ol>
+
+    <pre><code>
+ <intent-filter>
+     <action android:name="android.intent.action.VIEW" />
+
+     <category android:name="android.intent.category.DEFAULT" />
+     <category android:name="android.intent.category.BROWSABLE" />
+
+     <data android:scheme="DemoMSMPos" />
+ </intent-filter>
+ </code></pre>
 
     <hr />
   </li>
@@ -41,15 +51,11 @@ URL Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as par
     </ol>
 
     <pre><code>
- - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
- {
-     NSString *query = [url query];
-         NSDictionary *resultDic = [NSDictionary dictionaryWithObjectsAndKeys:query, @"msg"
-                                , nil];
-		
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"RECEIVED_RESULT" object:self userInfo:resultDic];
-		
-     return YES;
+ private String generateURL(){
+     String returnScheme= Uri.encode("DemoMSMPos://?transactionreturn=true");
+
+     String uri = String.format("msmpos://?return_url=%s&amp;pwd=%s&amp;return_key=%s&amp;type=S&amp;amount=%s&amp;tip_amount=%s&amp;reference_no=%s", returnScheme, pwd.getText(), return_key.getText().toString(), amt.getText().toString(), tip_amt.getText().toString(), ref_no.getText().toString());
+     return uri;
  }
  </code></pre>
     <p><br /></p>
@@ -57,14 +63,12 @@ URL Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as par
     <hr />
   </li>
   <li>
-    <p>Call your application’s openURL method with POGO’s URL and parameters to launch a POGO transaction:</p>
+    <p>Create a new intent with POGO’s URL and parameters to launch a POGO transaction:</p>
 
     <pre><code>
- - (IBAction)sendData:(id)sender {
-     [self closeKeyboard:sender];
-
-     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self makeURL]]];
- }
+ String uri = generateURL();
+ Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+ startActivity(intent);
  </code></pre>
 
     <ol>
@@ -240,10 +244,22 @@ Request URL : msmpos://?return_url=DemoMSMPos%3A%2F%2Fmcpayment%3F&amp;return_ke
     <hr />
   </li>
   <li>
-    <p>Add a notification observer to receive the response results from POGO </p>
+    <p>Add onResume() to receive the response results from POGO </p>
 
     <pre><code>
- [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setResult:) name:@"RECEIVED_RESULT" object:nil];
+ @Override
+ protected void onResume()
+ {
+     super.onResume();
+
+     try
+     {
+         // Parse the url for data
+         Uri url = getIntent().getData();
+     }
+     catch (Exception e){}
+
+ }
  </code></pre>
 
     <ol>
