@@ -65,6 +65,29 @@ URL Scheme: &lt;YourAppURLScheme&gt; e.g. DemoMSMPos (This will be passed as par
 
      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self makeURL]]];
  }
+ 
+ - (NSString*)makeURL
+{
+    NSString *targetURL = [NSMutableString stringWithFormat:@"msmpos://?"];;
+    NSString *params;
+    
+    switch (type.selectedSegmentIndex) {
+        case 0: //Sale
+        {
+            params = [NSString stringWithFormat:@"return_url=%@&pwd=%@&return_key=%@&type=S&amount=%@&tip_amount=%@&reference_no=%@&", [self encodeURL:@"DemoMSMPos://mcpayment?"], [self encodeURL:password.text], [self encodeURL:agent_id.text], [self encodeURL:amount.text], [self encodeURL:tipAmount.text], [self encodeURL:referenceNo.text]];
+            break;
+        }
+        case 1: //Void
+        {
+            params = [NSString stringWithFormat:@"return_url=%@&pwd=%@&return_key=%@&type=V&receipt_no=%@&", [self encodeURL:@"DemoMSMPos://mcpayment?"], [self encodeURL:password.text], [self encodeURL:agent_id.text], [self encodeURL:amount.text]];
+            break;
+        }
+            
+        default:
+            return @"";
+    }
+    return [NSString stringWithFormat:@"%@%@", targetURL, params];
+}
  </code></pre>
 
     <ol>
